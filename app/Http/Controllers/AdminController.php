@@ -298,8 +298,17 @@ class AdminController extends Controller
 
     public function adminshop()
     {
+        
+        return view('admin.adminshop');
+    }
+
+    public function adminshopview()
+    {
         $items=shopmodel::all();
-        return view('admin.adminshop',compact('items'));
+        $data=[
+            "data"=> $items
+        ];
+        return response()->json($data);
     }
 
     public function additem(Request $request)

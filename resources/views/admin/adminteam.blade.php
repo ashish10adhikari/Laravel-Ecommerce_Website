@@ -7,10 +7,10 @@
     <style>
         html,
         body {
-    height: 100%;
-    margin: 0;
-    background-color: #000; 
-}
+            height: 100%;
+            margin: 0;
+            background-color: #000;
+        }
 
         .navbar {
             width: 100%;
@@ -24,7 +24,7 @@
             width: 250px;
             position: fixed;
             top: 56px;
-            /* Adjust this value to match the height of your navbar */
+
             bottom: 0;
             left: 0;
             background-color: #343a40;
@@ -33,17 +33,17 @@
 
         .content-wrapper {
             margin-left: 250px;
-            /* Adjust this to match the width of your sidebar */
+
             padding: 20px;
             width: calc(100% - 250px);
-            /* Adjust this to match the width of your sidebar */
+
             margin-top: 56px;
-            /* Adjust this to the height of your navbar */
+
             display: flex;
             justify-content: center;
             align-items: center;
             height: calc(100vh - 56px);
-            /* Adjust this to the height of your navbar */
+
         }
 
         .d-flex {
@@ -135,28 +135,27 @@
 
     @include('admin.adminscript')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             var table = $('#teamtbl').DataTable({
-                ajax: "{{route('adminteam.view')}}",
-                columns:[
-                    {
-                        "data":null,
-                        render:function(data, type, row, meta){
+                ajax: "{{ route('adminteam.view') }}",
+                columns: [{
+                        "data": null,
+                        render: function(data, type, row, meta) {
                             return meta.row + 1;
                         }
                     },
                     {
-                        "data":"name"
+                        "data": "name"
                     },
                     {
-                        "data":"position"
+                        "data": "position"
                     },
                     {
-                        "data":"description"
+                        "data": "description"
                     },
                     {
-                        "data":"image",
-                        render: function(data,type,row){
+                        "data": "image",
+                        render: function(data, type, row) {
                             return '<img style="height: 100px; width:100px;" src="/teamimage/' +
                                 data +
                                 '" alt="Team Image">';

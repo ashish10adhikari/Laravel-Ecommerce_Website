@@ -22,7 +22,8 @@ class HomeController extends Controller
 
     public function shop()
     {
-        return view('webpages.shop');
+        $shops= ShopModel::all();
+        return view('webpages.shop',compact('shops'));
     }
     
     public function aboutus()

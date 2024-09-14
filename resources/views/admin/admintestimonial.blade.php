@@ -177,7 +177,7 @@
                             let url2 = "{{ route('updatecomment', ':id') }}".replace(':id', row.id);
                             return `<a href='${url1}'><button>Delete</button></a> <a href='${url2}'><button>Update</button></a>`;
                         }
-                    },
+                    }
                     
                 ]
             });

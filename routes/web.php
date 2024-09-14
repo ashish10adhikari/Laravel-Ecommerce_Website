@@ -52,6 +52,7 @@ Route::get('/deleteteam/{id}',[AdminController::class, 'deleteteam'])->name('del
 Route::get('/updateteam/{id}',[AdminController::class, 'updateteam'])->name('updateteam')->middleware('admin');
 Route::post('/editteam/{id}',[AdminController::class, 'editteam'])->name('editteam')->middleware('admin');
 Route::get('/adminshop',[AdminController::class, 'adminshop'])->name('adminshop')->middleware('admin');
+Route::get('/adminshopview',[AdminController::class, 'adminshopview'])->name('adminshop.view')->middleware('admin');
 Route::post('/additem',[AdminController::class, 'additem'])->name('additem')->middleware('admin');
 Route::get('/deleteitem/{id}',[AdminController::class, 'deleteitem'])->name('deleteitem')->middleware('admin');
 Route::get('/edititem/{id}',[AdminController::class, 'edititem'])->name('edititem')->middleware('admin');

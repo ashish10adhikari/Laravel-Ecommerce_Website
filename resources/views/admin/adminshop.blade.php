@@ -6,10 +6,10 @@
     <style>
         html,
         body {
-    height: 100%;
-    margin: 0;
-    background-color: #000; 
-}
+            height: 100%;
+            margin: 0;
+            background-color: #000;
+        }
 
         .navbar {
             width: 100%;
@@ -89,18 +89,19 @@
 
                 </form>
                 <div style="margin-top: 20px;">
-                    <table style="width: 100%;" id="mytable">
+                    <table style="width: 100%;" id="shoptbl">
                         <thead>
-                             <tr bgcolor=grey>
-                            <th style="color: black;">Name</th>
-                            <th style="color: black;">Price</th>
-                            <th style="color: black;">Image</th>
-                            <th style="color: black;">Action</th>
-                        </tr>
+                            <tr bgcolor=grey>
+                                <th style="color: black;">S.N</th>
+                                <th style="color: black;">Name</th>
+                                <th style="color: black;">Price</th>
+                                <th style="color: black;">Image</th>
+                                <th style="color: black;">Action</th>
+                            </tr>
                         </thead>
-                       
 
-                        @foreach ($items as $item)
+
+                        {{-- @foreach ($items as $item)
                         <tbody>
                              <tr>
                                 <td>{{ $item->name }}</td>
@@ -118,7 +119,7 @@
                             </tr>
                         </tbody>
                            
-                        @endforeach
+                        @endforeach --}}
 
                     </table>
                 </div>
@@ -127,6 +128,42 @@
     </div>
 
     @include('admin.adminscript')
+    <script>
+        $(document).ready(function() {
+            var table = $('#shoptbl').DataTable({
+                ajax: "{{ route('adminshop.view') }}",
+                columns: [{
+                        "data": null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    {
+                        "data": "name"
+                    },
+                    {
+                        "data": "price"
+                    },
+                    {
+                        "data":"image",
+                        render: function(data,type,row){
+                            return '<img style="height: 100px; width:100px;" src="/itemimage/' +
+                                data +
+                                '" alt="Item Image">';
+                        }
+                    },
+                    {
+                        "data": null,
+                        render: function(data, type, row) {
+                            let url1 = "{{ route('deleteitem', ':id') }}".replace(':id', row.id);
+                            let url2 = "{{ route('edititem', ':id') }}".replace(':id', row.id);
+                            return `<a href='${url1}'><button>Delete</button></a> <a href='${url2}'><button>Update</button></a>`;
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>
