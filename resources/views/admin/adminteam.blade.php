@@ -95,9 +95,10 @@
 
                 </form>
                 <div style="margin-top: 20px;">
-                    <table style="width: 100%;" id="mytable">
+                    <table style="width: 100%;" id="teamtbl">
                         <thead>
                             <tr bgcolor=grey>
+                                <th style="color: black;">S.N</th>
                                 <th style="color: black;">Name</th>
                                 <th style="color: black;">Position</th>
                                 <th style="color: black;">Description at</th>
@@ -106,7 +107,7 @@
                             </tr>
                         </thead>
 
-                        @foreach ($addteams as $addteam)
+                        {{-- @foreach ($addteams as $addteam)
                         <tbody>
                             <tr>
                                 <td>{{ $addteam->name }}</td>
@@ -124,7 +125,7 @@
 
                             </tr>
                         </tbody>
-                        @endforeach
+                        @endforeach --}}
 
                     </table>
                 </div>
@@ -133,6 +134,46 @@
     </div>
 
     @include('admin.adminscript')
+    <script>
+        $(document).ready(function(){
+            var table = $('#teamtbl').DataTable({
+                ajax: "{{route('adminteam.view')}}",
+                columns:[
+                    {
+                        "data":null,
+                        render:function(data, type, row, meta){
+                            return meta.row + 1;
+                        }
+                    },
+                    {
+                        "data":"name"
+                    },
+                    {
+                        "data":"position"
+                    },
+                    {
+                        "data":"description"
+                    },
+                    {
+                        "data":"image",
+                        render: function(data,type,row){
+                            return '<img style="height: 100px; width:100px;" src="/teamimage/' +
+                                data +
+                                '" alt="Team Image">';
+                        }
+                    },
+                    {
+                        "data": null,
+                        render: function(data, type, row) {
+                            let url1 = "{{ route('deleteteam', ':id') }}".replace(':id', row.id);
+                            let url2 = "{{ route('updateteam', ':id') }}".replace(':id', row.id);
+                            return `<a href='${url1}'><button>Delete</button></a> <a href='${url2}'><button>Update</button></a>`;
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -234,8 +234,17 @@ class AdminController extends Controller
 
     public function adminteam()
     {
+        return view('admin.adminteam');
+    }
+
+    public function adminteamview()
+    {
         $addteams=teammodel::latest()->get();
-        return view('admin.adminteam',compact('addteams'));
+        $data =[
+            "data"=>$addteams
+        ];
+
+        return response()->json($data);
     }
 
     public function addteam(Request $request)

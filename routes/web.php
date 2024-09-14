@@ -46,6 +46,7 @@ Route::get('/admincontact',[AdminController::class, 'admincontact'])->name('admi
 Route::get('/admincontactview',[AdminController::class, 'admincontactview'])->name('admincontact.views')->middleware('admin');
 Route::get('/deletecontact/{id}',[AdminController::class, 'deletecontact'])->name('deletecontact')->middleware('admin');
 Route::get('/adminteam',[AdminController::class, 'adminteam'])->name('adminteam')->middleware('admin');
+Route::get('/adminteamview',[AdminController::class, 'adminteamview'])->name('adminteam.view')->middleware('admin');
 Route::post('/addteam',[AdminController::class, 'addteam'])->name('addteam')->middleware('admin');
 Route::get('/deleteteam/{id}',[AdminController::class, 'deleteteam'])->name('deleteteam')->middleware('admin');
 Route::get('/updateteam/{id}',[AdminController::class, 'updateteam'])->name('updateteam')->middleware('admin');

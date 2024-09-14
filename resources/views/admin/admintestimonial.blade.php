@@ -173,17 +173,12 @@
                     {
                         "data": null,
                         render: function(data, type, row) {
-                            let url = "{{ route('deletecomment', ':id') }}".replace(':id', row.id);
-                            return `<a href='${url}'><button>Delete</button></a>`;
+                            let url1 = "{{ route('deletecomment', ':id') }}".replace(':id', row.id);
+                            let url2 = "{{ route('updatecomment', ':id') }}".replace(':id', row.id);
+                            return `<a href='${url1}'><button>Delete</button></a> <a href='${url2}'><button>Update</button></a>`;
                         }
                     },
-                    {
-                        "data": null,
-                        render: function(data, type, row) {
-                            let url = "{{ route('updatecomment', ':id') }}".replace(':id', row.id);
-                            return `<a href='${url}'><button>Update</button></a>`;
-                        }
-                    }
+                    
                 ]
             });
         });
