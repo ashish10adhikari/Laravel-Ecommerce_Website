@@ -43,6 +43,7 @@ Route::get('/deleteblog/{id}',[AdminController::class, 'deleteblog'])->name('del
 Route::get('/updateblog/{id}',[AdminController::class, 'updateblog'])->name('updateblog')->middleware('admin');
 Route::post('/updatetheblog/{id}',[AdminController::class, 'updatetheblog'])->name('updatetheblog')->middleware('admin');
 Route::get('/admincontact',[AdminController::class, 'admincontact'])->name('admincontact')->middleware('admin');
+Route::get('/admincontactview',[AdminController::class, 'admincontactview'])->name('admincontact.views')->middleware('admin');
 Route::get('/deletecontact/{id}',[AdminController::class, 'deletecontact'])->name('deletecontact')->middleware('admin');
 Route::get('/adminteam',[AdminController::class, 'adminteam'])->name('adminteam')->middleware('admin');
 Route::post('/addteam',[AdminController::class, 'addteam'])->name('addteam')->middleware('admin');

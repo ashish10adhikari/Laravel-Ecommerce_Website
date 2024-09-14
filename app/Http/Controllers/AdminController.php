@@ -211,8 +211,18 @@ class AdminController extends Controller
 
     public function admincontact()
     {
+        
+        return view('admin.admincontact');
+    }
+
+    public function admincontactview()
+    {
         $contacts=contactmodel::latest()->get();
-        return view('admin.admincontact',compact('contacts'));
+        $data=
+        ["data"=> $contacts
+        ];
+        return response()->json($data);
+        
     }
 
     public function deletecontact($id)

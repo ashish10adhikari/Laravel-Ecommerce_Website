@@ -65,19 +65,20 @@
 
             <div style="width:90%; text-align:center; ">
                 <h1>Contact Page</h1>
-                <table style="width: 100%;" id="mytable">
+                <table style="width: 100%;" id="contacttbl">
                     <thead>
                         <tr bgcolor=grey>
-                        <th style="color: black;">First Name</th>
-                        <th style="color: black;">Last Name</th>
-                        <th style="color: black;">Email</th>
-                        <th style="color: black;">Message</th>
-                        <th style="color: black;">Action</th>
-                    </tr>
+                            <th style="color: black;">S.N</th>
+                            <th style="color: black;">First Name</th>
+                            <th style="color: black;">Last Name</th>
+                            <th style="color: black;">Email</th>
+                            <th style="color: black;">Message</th>
+                            <th style="color: black;">Action</th>
+                        </tr>
                     </thead>
-                    
 
-                    @foreach ($contacts as $contact)
+
+                    {{-- @foreach ($contacts as $contact)
                     <tbody>
                         <tr>
                             <td>{{ $contact->fname }}</td>
@@ -95,7 +96,7 @@
                         </tr>
                     </tbody>
                         
-                    @endforeach
+                    @endforeach --}}
 
                 </table>
             </div>
@@ -108,6 +109,42 @@
     </div>
 
     @include('admin.adminscript')
+    <script>
+        $(document).ready(function(){
+            var table = $('#contacttbl').DataTable({
+                ajax: "{{route('admincontact.views')}}",
+                columns:[
+                    {
+                        "data": null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    {
+                        "data": "fname"
+                    },
+                    {
+                        "data": "lname"
+                    },
+                     {
+                        "data": "email"
+                    },
+                    {
+                        "data": "message"
+                     },
+                    {
+                        "data": null,
+                        render: function(data, type, row) {
+                            let url1 = "{{ route('deletecontact', ':id') }}".replace(':id', row.id);
+                           
+                            return `<a href='${url1}'><button>Delete</button></a>`;
+                        }
+                     }
+                ]
+
+            });
+        });
+    </script>
 </body>
 
 </html>
