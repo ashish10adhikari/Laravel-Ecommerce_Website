@@ -54,15 +54,8 @@ class AdminController extends Controller
     {
         $testimonials=testimonial::latest()->get();
         $data = [
-            "data" => $testimonials->map(function($testimonial) {
-                return [
-                    "id" => $testimonial->id,
-                    "name" => $testimonial->name,
-                    "position" => $testimonial->position,
-                    "comment" => $testimonial->comment,
-                    "image" => $testimonial->image  
-                ];
-            })
+            "data" => $testimonials
+            
         ];
         return response()->json($data);
     }
@@ -94,7 +87,10 @@ class AdminController extends Controller
     
     $testimonial->save();
 
-        return redirect()->back();
+    $message = [
+        "message"=>"Data Saved Successfully."
+    ];
+    return response()->json($message);
     }
 
     public function deletecomment($id)
@@ -173,7 +169,10 @@ class AdminController extends Controller
         }
 
         $addblog->save();
-        return redirect()->back();
+        $message = [
+            "message" => "Saved Successfully"
+        ];
+        return response()->json($message);
 
 
 
@@ -261,7 +260,10 @@ class AdminController extends Controller
         $addteam->image = $imagename;
     }
     $addteam->save();
-    return redirect()->back();
+    $message = [
+        "message" => "Saved successfully"
+    ];
+    return response()->json($message);
 
     }
 
@@ -324,7 +326,10 @@ class AdminController extends Controller
             $newitem->image = $imagename;
         }
         $newitem->save();
-        return redirect()->back();
+        $message = [
+            "message" => "Added Successfully"
+        ];
+        return response()->json($message);
     }
     
     public function deleteitem($id)

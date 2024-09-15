@@ -65,7 +65,8 @@
         <div class="content-wrapper" style="align-items:flex-start; padding-top:50px;">
             <div style="width:100%; text-align:center; ">
                 <h1>Add Blog Page</h1>
-                <form action="{{ route('addblog') }}" method="POST" enctype="multipart/form-data">
+                <div id="message"></div>
+                <form action="{{ route('addblog') }}" method="POST" enctype="multipart/form-data" id="blogform">
                     @csrf
                     <div style="display: flex; justify-content:space-evenly;">
                         <div>
@@ -131,14 +132,34 @@
     @include('admin.adminscript')
     <script>
         $(document).ready(function() {
+            //for form
+            $('#blogform').on('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: "{{ route('addblog') }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(result) {
+                        $('#message').css('display', 'block');
+                        $('#message').html(result.message);
+                        $('#blogform')[0].reset();
+                        table.ajax.reload();
+                    }
+                });
+            });
+
+            //for datatable
             var table = $('#blogtbl').DataTable({
                 ajax: "{{ route('adminblog.view') }}",
                 "searching": true,
                 "responsive": true,
                 "destroy": true,
-                "order": [
-                    [3, 'desc']
-                ],
+                // "order": [
+                //     [3, 'desc']
+                // ],
                 "ordering": true,
                 "paging": true,
                 columns: [{

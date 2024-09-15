@@ -66,7 +66,8 @@
         <div class="content-wrapper" style="align-items:flex-start; padding-top:50px;">
             <div style="width:100%; text-align:center; ">
                 <h1>Add Team Page</h1>
-                <form action="{{ route('addteam') }}" method="POST" enctype="multipart/form-data">
+                <div id="message"></div>
+                <form action="{{ route('addteam') }}" method="POST" enctype="multipart/form-data" id="teamform">
                     @csrf
                     <div style="display: flex; justify-content:space-evenly;">
                         <div>
@@ -136,6 +137,26 @@
     @include('admin.adminscript')
     <script>
         $(document).ready(function() {
+            //for form
+            $('#teamform').on('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: "{{ route('addteam') }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(result) {
+                        $('#message').css('display', 'block');
+                        $('#message').html(result.message);
+                        $('#teamform')[0].reset();
+                        table.ajax.reload();
+                    }
+                });
+            });
+
+            //for datatable
             var table = $('#teamtbl').DataTable({
                 ajax: "{{ route('adminteam.view') }}",
                 columns: [{
