@@ -47,13 +47,15 @@
                 @foreach ($shops as $shop)
                     <div class="col-12 col-md-4 col-lg-3 mb-5">
                         <a class="product-item" href="">
-                            <img src="/itemimage/{{$shop->image}}" class="img-fluid product-thumbnail">
-                            <h3 class="product-title">{{$shop->name}}</h3>
-                            <strong class="product-price">{{$shop->price}}</strong>
+                            <img src="/itemimage/{{ $shop->image }}" class="img-fluid product-thumbnail">
+                            <h3 class="product-title">{{ $shop->name }}</h3>
+                            <strong class="product-price">{{ $shop->price }}</strong>
 
-                            <span class="icon-cross">
+
+                            <span class="icon-cross" id="cart-btn-{{$shop->id}}">
                                 <img src="images/cross.svg" class="img-fluid">
                             </span>
+
                         </a>
                     </div>
                 @endforeach
@@ -73,6 +75,11 @@
 
     <!-- Script Footer Section -->
     @include('webpages.includes.script')
+    <script>
+        $(document).ready(function() {
+
+        });
+    </script>
 </body>
 
 </html>

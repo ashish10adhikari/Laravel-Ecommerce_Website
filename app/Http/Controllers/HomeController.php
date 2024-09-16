@@ -16,7 +16,8 @@ class HomeController extends Controller
     {
         $testimonials=testimonial::all();
         $blogs=blogmodel::latest()->take(3)->get();
-        return view('webpages.home',compact('testimonials','blogs'));
+        $shopitems = shopmodel::latest()->take(3)->get();
+        return view('webpages.home',compact('testimonials','blogs','shopitems'));
         // dd(Auth::user());
     }
 
@@ -64,6 +65,11 @@ class HomeController extends Controller
     public function cart()
     {
         return view('webpages.cart');
+    }
+
+    public function checkout()
+    {
+        return view('webpages.checkout');
     }
 
 }

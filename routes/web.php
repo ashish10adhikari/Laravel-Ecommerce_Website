@@ -23,6 +23,7 @@ Route::get('/blog',[HomeController::class, 'blog'])->name('blog');
 Route::get('/contact',[HomeController::class, 'contact'])->name('contact');
 Route::get('/cart',[HomeController::class, 'cart'])->name('cart');
 Route::post('/contactus',[HomeController::class, 'contactus'])->name('contactus');
+Route::get('/checkout',[HomeController::class, 'checkout'])->name('checkout');
 
 
 // For Admin Routes
